@@ -55,6 +55,13 @@ dependencies:
   confetti: ^0.7.0
   fl_chart: ^0.69.0
   glassmorphism: ^3.0.0
+  # Temporarily commented for testing without Firebase config
+  # firebase_core: ^3.8.1
+  # firebase_auth: ^5.3.3
+  # cloud_firestore: ^5.5.1
+  # firebase_storage: ^12.3.7
+  # cloud_functions: ^5.2.1
+  # firebase_messaging: ^15.1.5
 
 dev_dependencies:
   flutter_test:
