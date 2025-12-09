@@ -135,25 +135,53 @@ class _LoginScreenState extends ConsumerState<LoginScreen> with SingleTickerProv
           decoration: const InputDecoration(
             labelText: 'Phone Number',
             prefixIcon: Icon(Icons.phone),
-            prefixText: '+91 ', // Default country code logic needed later
+            hintText: '+1 234 567 8900',
           ),
         ),
         const SizedBox(height: 24),
         SizedBox(
           width: double.infinity,
+          height: 50,
           child: ElevatedButton(
             onPressed: isLoading
                 ? null
                 : () {
-                    // Implement Phone Auth Trigger
+                    // Generate random 6-digit OTP
+                    if (_phoneController.text.isNotEmpty) {
+                      final random = DateTime.now().millisecondsSinceEpoch % 1000000;
+                      final otp = random.toString().padLeft(6, '0');
+                      
+                      context.push(
+                        '/otp-verify',
+                        extra: {
+                          'phoneNumber': _phoneController.text,
+                          'verificationId': 'demo_verification_id',
+                          'generatedOTP': otp,
+                        },
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please enter phone number'),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    }
                   },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).primaryColor,
+              foregroundColor: Colors.black,
+            ),
             child: isLoading
                 ? const SizedBox(
                     height: 20,
                     width: 20,
-                    child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                    child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black),
                   )
-                : const Text('Send OTP'),
+                : const Text(
+                    'Send OTP',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
           ),
         ),
       ],
