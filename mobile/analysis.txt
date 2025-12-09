@@ -1,0 +1,138 @@
+Analyzing mobile...                                             
+
+warning - Unused import: 'package:flutter/material.dart' - lib\core\router\router_config.dart:2:8 - unused_import
+   info - 'background' is deprecated and shouldn't be used. Use surface instead. This feature was deprecated after v3.18.0-0.1.pre - lib\core\theme\app_theme.dart:36:9 - deprecated_member_use
+   info - 'onBackground' is deprecated and shouldn't be used. Use onSurface instead. This feature was deprecated after v3.18.0-0.1.pre - lib\core\theme\app_theme.dart:41:9 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\theme\app_theme.dart:63:50 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\theme\app_theme.dart:69:51 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\theme\app_theme.dart:70:50 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\theme\app_theme.dart:77:54 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\widgets\tilt_3d_card.dart:69:61 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\widgets\tilt_3d_card.dart:74:58 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\admin\presentation\admin_dashboard_screen.dart:59:56 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\admin\presentation\admin_dashboard_screen.dart:85:30 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\admin\presentation\admin_dashboard_screen.dart:167:24 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\admin\presentation\admin_dashboard_screen.dart:167:48 - deprecated_member_use
+warning - Unused import: '../../../core/theme/app_theme.dart' - lib\features\auth\presentation\login_screen.dart:5:8 - unused_import
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\features\auth\presentation\login_screen.dart:167:11 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\features\auth\presentation\signup_screen.dart:53:19 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\doctor\presentation\doctor_home_screen.dart:49:52 - deprecated_member_use
+warning - Unused import: '../../../core/theme/app_theme.dart' - lib\features\doctor\presentation\patient_search_screen.dart:3:8 - unused_import
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\doctor\presentation\patient_search_screen.dart:117:64 - deprecated_member_use
+  error - Undefined class 'Widget' - lib\features\executive\presentation\executive_home_screen.dart:9:3 - undefined_class
+  error - Undefined class 'BuildContext' - lib\features\executive\presentation\executive_home_screen.dart:9:16 - undefined_class
+  error - The method 'Scaffold' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:10:12 - undefined_method
+  error - The method 'AppBar' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:11:15 - undefined_method
+  error - The name 'Text' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:12:22 - creation_with_non_type
+  error - Undefined name 'Colors' - lib\features\executive\presentation\executive_home_screen.dart:13:26 - undefined_identifier
+  error - The method 'IconButton' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:16:11 - undefined_method
+  error - The name 'Icon' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:21:25 - creation_with_non_type
+  error - Undefined name 'Icons' - lib\features\executive\presentation\executive_home_screen.dart:21:30 - undefined_identifier
+  error - The method 'SingleChildScrollView' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:25:13 - undefined_method
+  error - The name 'all' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:26:24 - creation_with_non_type
+  error - The method 'Column' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:27:16 - undefined_method
+  error - Undefined name 'CrossAxisAlignment' - lib\features\executive\presentation\executive_home_screen.dart:28:31 - undefined_identifier
+  error - The method 'Text' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:30:13 - undefined_method
+  error - Undefined name 'Theme' - lib\features\executive\presentation\executive_home_screen.dart:30:37 - undefined_identifier
+  error - Undefined name 'Colors' - lib\features\executive\presentation\executive_home_screen.dart:30:96 - undefined_identifier
+  error - Undefined name 'FontWeight' - lib\features\executive\presentation\executive_home_screen.dart:30:122 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:31:19 - creation_with_non_type
+  error - The method 'Row' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:32:13 - undefined_method
+  error - The method 'Expanded' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:34:17 - undefined_method
+  error - Undefined name 'Icons' - lib\features\executive\presentation\executive_home_screen.dart:34:83 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:35:23 - creation_with_non_type
+  error - The method 'Expanded' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:36:17 - undefined_method
+  error - Undefined name 'Icons' - lib\features\executive\presentation\executive_home_screen.dart:36:78 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:39:19 - creation_with_non_type
+  error - The method 'Text' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:40:13 - undefined_method
+  error - Undefined name 'Theme' - lib\features\executive\presentation\executive_home_screen.dart:40:36 - undefined_identifier
+  error - Undefined name 'Colors' - lib\features\executive\presentation\executive_home_screen.dart:40:92 - undefined_identifier
+  error - Undefined name 'FontWeight' - lib\features\executive\presentation\executive_home_screen.dart:40:118 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:41:20 - creation_with_non_type
+  error - The method 'InkWell' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:42:13 - undefined_method
+  error - The name 'Color' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:45:30 - creation_with_non_type
+  error - The method 'Padding' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:46:24 - undefined_method
+  error - The name 'all' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:47:34 - creation_with_non_type
+  error - The method 'Row' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:48:26 - undefined_method
+  error - The method 'Container' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:50:23 - undefined_method
+  error - The name 'all' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:51:40 - creation_with_non_type
+  error - The method 'BoxDecoration' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:52:37 - undefined_method
+  error - Undefined name 'Theme' - lib\features\executive\presentation\executive_home_screen.dart:53:34 - undefined_identifier
+  error - Undefined name 'BoxShape' - lib\features\executive\presentation\executive_home_screen.dart:54:34 - undefined_identifier
+  error - The name 'Icon' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:56:38 - creation_with_non_type
+  error - Undefined name 'Icons' - lib\features\executive\presentation\executive_home_screen.dart:56:43 - undefined_identifier
+  error - Undefined name 'Colors' - lib\features\executive\presentation\executive_home_screen.dart:56:61 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:58:29 - creation_with_non_type
+  error - The method 'Column' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:59:23 - undefined_method
+  error - Undefined name 'CrossAxisAlignment' - lib\features\executive\presentation\executive_home_screen.dart:60:45 - undefined_identifier
+  error - The name 'Text' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:62:33 - creation_with_non_type
+  error - The method 'TextStyle' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:62:65 - undefined_method
+  error - Undefined name 'Colors' - lib\features\executive\presentation\executive_home_screen.dart:62:82 - undefined_identifier
+  error - Undefined name 'FontWeight' - lib\features\executive\presentation\executive_home_screen.dart:62:122 - undefined_identifier
+  error - The method 'Text' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:63:27 - undefined_method
+  error - The method 'TextStyle' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:63:71 - undefined_method
+  error - Undefined name 'Colors' - lib\features\executive\presentation\executive_home_screen.dart:63:88 - undefined_identifier
+  error - The name 'Spacer' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:66:29 - creation_with_non_type
+  error - The method 'Icon' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:67:23 - undefined_method
+  error - Undefined name 'Icons' - lib\features\executive\presentation\executive_home_screen.dart:67:28 - undefined_identifier
+  error - Undefined name 'Theme' - lib\features\executive\presentation\executive_home_screen.dart:67:60 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:73:20 - creation_with_non_type
+  error - The method 'Text' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:74:14 - undefined_method
+  error - Undefined name 'Theme' - lib\features\executive\presentation\executive_home_screen.dart:74:45 - undefined_identifier
+  error - Undefined name 'Colors' - lib\features\executive\presentation\executive_home_screen.dart:74:101 - undefined_identifier
+  error - Undefined name 'FontWeight' - lib\features\executive\presentation\executive_home_screen.dart:74:127 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:75:20 - creation_with_non_type
+  error - Undefined class 'Widget' - lib\features\executive\presentation\executive_home_screen.dart:83:3 - undefined_class
+  error - Undefined class 'BuildContext' - lib\features\executive\presentation\executive_home_screen.dart:83:25 - undefined_class
+  error - Undefined class 'IconData' - lib\features\executive\presentation\executive_home_screen.dart:83:75 - undefined_class
+  error - The method 'Padding' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:85:14 - undefined_method
+  error - The name 'all' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:86:24 - creation_with_non_type
+  error - The method 'Column' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:87:16 - undefined_method
+  error - Undefined name 'CrossAxisAlignment' - lib\features\executive\presentation\executive_home_screen.dart:88:31 - undefined_identifier
+  error - The method 'Icon' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:90:13 - undefined_method
+  error - Undefined name 'Theme' - lib\features\executive\presentation\executive_home_screen.dart:90:31 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:91:19 - creation_with_non_type
+  error - The method 'Text' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:92:13 - undefined_method
+  error - The name 'TextStyle' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:92:38 - creation_with_non_type
+  error - Undefined name 'FontWeight' - lib\features\executive\presentation\executive_home_screen.dart:92:74 - undefined_identifier
+  error - Undefined name 'Colors' - lib\features\executive\presentation\executive_home_screen.dart:92:98 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:93:19 - creation_with_non_type
+  error - The method 'Text' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:94:13 - undefined_method
+  error - The method 'TextStyle' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:94:32 - undefined_method
+  error - Undefined name 'Colors' - lib\features\executive\presentation\executive_home_screen.dart:94:49 - undefined_identifier
+  error - Undefined class 'Widget' - lib\features\executive\presentation\executive_home_screen.dart:101:3 - undefined_class
+  error - Undefined class 'BuildContext' - lib\features\executive\presentation\executive_home_screen.dart:101:29 - undefined_class
+  error - The method 'Column' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:109:12 - undefined_method
+  error - The method 'Container' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:111:16 - undefined_method
+  error - The name 'only' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:112:25 - creation_with_non_type
+  error - The name 'all' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:113:26 - creation_with_non_type
+  error - The method 'BoxDecoration' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:114:23 - undefined_method
+  error - The name 'Color' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:115:26 - creation_with_non_type
+  error - Undefined name 'BorderRadius' - lib\features\executive\presentation\executive_home_screen.dart:116:27 - undefined_identifier
+  error - Undefined name 'Border' - lib\features\executive\presentation\executive_home_screen.dart:117:21 - undefined_identifier
+  error - Undefined name 'Colors' - lib\features\executive\presentation\executive_home_screen.dart:117:39 - undefined_identifier
+  error - The method 'Row' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:119:18 - undefined_method
+  error - The method 'CircleAvatar' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:121:15 - undefined_method
+  error - Undefined name 'Colors' - lib\features\executive\presentation\executive_home_screen.dart:121:45 - undefined_identifier
+  error - The method 'Icon' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:121:68 - undefined_method
+  error - Undefined name 'Icons' - lib\features\executive\presentation\executive_home_screen.dart:121:73 - undefined_identifier
+  error - Undefined name 'Colors' - lib\features\executive\presentation\executive_home_screen.dart:121:95 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:122:21 - creation_with_non_type
+  error - The method 'Column' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:123:15 - undefined_method
+  error - Undefined name 'CrossAxisAlignment' - lib\features\executive\presentation\executive_home_screen.dart:124:37 - undefined_identifier
+  error - The method 'Text' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:126:19 - undefined_method
+  error - The name 'TextStyle' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:126:57 - creation_with_non_type
+  error - Undefined name 'Colors' - lib\features\executive\presentation\executive_home_screen.dart:126:74 - undefined_identifier
+  error - Undefined name 'FontWeight' - lib\features\executive\presentation\executive_home_screen.dart:126:100 - undefined_identifier
+  error - The method 'Text' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:127:19 - undefined_method
+  error - The method 'TextStyle' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:127:50 - undefined_method
+  error - Undefined name 'Colors' - lib\features\executive\presentation\executive_home_screen.dart:127:67 - undefined_identifier
+  error - The name 'Spacer' isn't a class - lib\features\executive\presentation\executive_home_screen.dart:130:21 - creation_with_non_type
+  error - The method 'Text' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:131:15 - undefined_method
+  error - The method 'TextStyle' isn't defined for the type 'ExecutiveHomeScreen' - lib\features\executive\presentation\executive_home_screen.dart:131:50 - undefined_method
+  error - Undefined name 'Theme' - lib\features\executive\presentation\executive_home_screen.dart:131:67 - undefined_identifier
+  error - Undefined name 'FontWeight' - lib\features\executive\presentation\executive_home_screen.dart:131:111 - undefined_identifier
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\patient\presentation\patient_home_screen.dart:70:50 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\patient\presentation\patient_home_screen.dart:77:55 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\patient\presentation\patient_reports_screen.dart:36:52 - deprecated_member_use
+
