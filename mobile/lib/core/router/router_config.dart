@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../features/auth/presentation/login_screen.dart';
 import '../../features/auth/presentation/splash_screen.dart';
 import '../../features/auth/presentation/signup_screen.dart';
+import '../../features/auth/presentation/otp_verification_screen.dart';
 import '../../features/patient/presentation/patient_home_screen.dart';
 import '../../features/patient/presentation/patient_reports_screen.dart';
 import '../../features/doctor/presentation/doctor_home_screen.dart';
@@ -28,6 +29,16 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/signup',
         builder: (context, state) => const SignUpScreen(),
+      ),
+      GoRoute(
+        path: '/otp-verify',
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>;
+          return OTPVerificationScreen(
+            phoneNumber: extra['phoneNumber'] as String,
+            verificationId: extra['verificationId'] as String,
+          );
+        },
       ),
       GoRoute(
         path: '/patient-home',
