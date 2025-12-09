@@ -8,11 +8,13 @@ import '../../../core/widgets/glass_card.dart';
 class OTPVerificationScreen extends ConsumerStatefulWidget {
   final String phoneNumber;
   final String verificationId;
+  final String? generatedOTP; // The OTP generated for this session
 
   const OTPVerificationScreen({
     super.key,
     required this.phoneNumber,
     required this.verificationId,
+    this.generatedOTP,
   });
 
   @override
@@ -81,12 +83,15 @@ class _OTPVerificationScreenState extends ConsumerState<OTPVerificationScreen>
 
     setState(() => _isVerifying = true);
 
-    // Demo mode: Accept "123456" as valid OTP
+    // Simulate network delay
     await Future.delayed(const Duration(seconds: 2));
 
     setState(() => _isVerifying = false);
 
-    if (otp == '123456') {
+    // Verify against generated OTP or fallback to 123456 for backward compatibility
+    final expectedOTP = widget.generatedOTP ?? '123456';
+    
+    if (otp == expectedOTP) {
       // Success
       if (mounted) {
         _showSuccess();
@@ -94,7 +99,7 @@ class _OTPVerificationScreenState extends ConsumerState<OTPVerificationScreen>
         context.go('/patient-home');
       }
     } else {
-      _showError('Invalid OTP. Try 123456 for demo');
+      _showError('Invalid OTP. Check the hint below');
       _clearOTP();
       _shakeController.forward().then((_) => _shakeController.reverse());
     }
@@ -237,20 +242,43 @@ class _OTPVerificationScreenState extends ConsumerState<OTPVerificationScreen>
 
                 const SizedBox(height: 32),
 
-                // Demo hint
+                // Demo hint - Show generated OTP
                 GlassCard(
                   padding: const EdgeInsets.all(16),
                   child: Row(
                     children: [
-                      Icon(Icons.info_outline, color: Theme.of(context).primaryColor, size: 20),
+                      Icon(Icons.sms, color: Theme.of(context).primaryColor, size: 24),
                       const SizedBox(width: 12),
                       Expanded(
-                        child: Text(
-                          'Demo Mode: Use 123456 as OTP',
-                          style: TextStyle(
-                            color: Colors.grey[300],
-                            fontSize: 13,
-                          ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Your OTP Code',
+                              style: TextStyle(
+                                color: Colors.grey[400],
+                                fontSize: 12,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              widget.generatedOTP ?? '123456',
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 8,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              'Demo Mode: OTP displayed here since no SMS is sent',
+                              style: TextStyle(
+                                color: Colors.grey[600],
+                                fontSize: 11,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],

@@ -37,6 +37,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           return OTPVerificationScreen(
             phoneNumber: extra['phoneNumber'] as String,
             verificationId: extra['verificationId'] as String,
+            generatedOTP: extra['generatedOTP'] as String?,
           );
         },
       ),
