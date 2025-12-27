@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:async';
-import '../../../core/widgets/glass_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class OTPVerificationScreen extends ConsumerStatefulWidget {

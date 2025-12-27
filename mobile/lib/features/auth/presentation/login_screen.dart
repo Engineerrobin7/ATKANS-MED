@@ -430,7 +430,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> with SingleTickerProv
     return GlassCard(
       padding: EdgeInsets.zero,
       child: DropdownButtonFormField<String>(
-        value: value,
+        initialValue: value,
         dropdownColor: const Color(0xFF1A1A1A),
         style: const TextStyle(color: Colors.white),
         decoration: InputDecoration(

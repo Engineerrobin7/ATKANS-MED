@@ -12,8 +12,8 @@ class OTPScreen extends StatefulWidget {
     required this.email,
     required this.method,
     required this.isLogin,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<OTPScreen> createState() => _OTPScreenState();
@@ -77,7 +77,7 @@ class _OTPScreenState extends State<OTPScreen> {
       };
 
       final response = await http.post(
-        Uri.parse('http://your-api.com$endpoint'),
+        Uri.parse('https://atkans-med-api.onrender.com$endpoint'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(body),
       ).timeout(const Duration(seconds: 30));
@@ -121,7 +121,7 @@ class _OTPScreenState extends State<OTPScreen> {
       };
 
       final response = await http.post(
-        Uri.parse('http://your-api.com$endpoint'),
+        Uri.parse('https://atkans-med-api.onrender.com$endpoint'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(body),
       );
@@ -294,7 +294,7 @@ class _OTPScreenState extends State<OTPScreen> {
 // ============================================
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -322,7 +322,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     try {
       final response = await http.post(
-        Uri.parse('http://your-api.com/api/auth/request-login-otp'),
+        Uri.parse('https://atkans-med-api.onrender.com/api/auth/request-login-otp'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'email': _emailController.text,
@@ -411,7 +411,7 @@ class _LoginScreenState extends State<LoginScreen> {
 // ============================================
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+  const RegisterScreen({super.key});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -440,7 +440,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     try {
       final response = await http.post(
-        Uri.parse('http://your-api.com/api/auth/send-otp'),
+        Uri.parse('https://atkans-med-api.onrender.com/api/auth/send-otp'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'email': _emailController.text,
@@ -509,7 +509,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               const SizedBox(height: 20),
               DropdownButtonFormField(
-                value: _selectedRole,
+                initialValue: _selectedRole,
                 decoration: InputDecoration(
                   labelText: 'Role',
                   border: OutlineInputBorder(
