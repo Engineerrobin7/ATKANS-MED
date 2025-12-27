@@ -15,34 +15,13 @@
       },
       "oauth_client": [
         {
-          "client_id": "339895708806-45r9ed4h0q81o45h1tasumpl2cd36h5h.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDo-oKdImoEqPzFT3vwGTJ5j6x74bXcWjc"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "339895708806-45r9ed4h0q81o45h1tasumpl2cd36h5h.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:339895708806:android:60a63440d1fe78f0e3b507",
-        "android_client_info": {
-          "package_name": "om.atkansmed.mobile"
-        }
-      },
-      "oauth_client": [
+          "client_id": "339895708806-3nkaujvg4f4p27feaofvj774vsk5g5om.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.atkansmed.mobile",
+            "certificate_hash": "bbf2ef6cbd853171b0fb3cced40f686217211e4c"
+          }
+        },
         {
           "client_id": "339895708806-45r9ed4h0q81o45h1tasumpl2cd36h5h.apps.googleusercontent.com",
           "client_type": 3

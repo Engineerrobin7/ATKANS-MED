@@ -33,12 +33,10 @@ class AppTheme {
         primary: limeGreen,
         secondary: limeGreen,
         surface: darkSurface,
-        background: blackBackground,
         error: Color(0xFFCF6679),
         onPrimary: Colors.black, // Text on lime green should be black usually
         onSecondary: Colors.black,
         onSurface: whiteText,
-        onBackground: whiteText,
       ),
       textTheme: textTheme.apply(
         bodyColor: whiteText,
