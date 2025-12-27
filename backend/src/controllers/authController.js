@@ -465,7 +465,7 @@ exports.firebasePhoneLogin = async (req, res) => {
                 lastLoginAt: new Date(),
             });
         }
-        
+
         // Create or update user profile based on role
         let profile = null;
         if (user.role === 'patient') {
@@ -533,6 +533,115 @@ exports.firebasePhoneLogin = async (req, res) => {
         res.status(500).json({
             success: false,
             message: error.message || 'Failed to authenticate with Firebase.',
+        });
+    }
+};
+
+// @desc    Login or Register user via Google Auth
+// @route   POST /api/auth/google-login
+// @access  Public
+exports.googleLogin = async (req, res) => {
+    const { idToken, role = 'patient' } = req.body;
+
+    if (!idToken) {
+        return res.status(400).json({
+            success: false,
+            message: 'Firebase ID token is required.',
+        });
+    }
+
+    try {
+        // Verify the ID token
+        const decodedToken = await admin.auth().verifyIdToken(idToken);
+        const { email, name, picture, uid: firebaseUId } = decodedToken;
+
+        if (!email) {
+            return res.status(400).json({
+                success: false,
+                message: 'Email not found in Firebase token.',
+            });
+        }
+
+        let user;
+        const existingUsers = await FirestoreHelper.findAll(Collections.USERS, { email });
+
+        if (existingUsers.length > 0) {
+            // User exists, update last login and firebase UID
+            user = existingUsers[0];
+            await FirestoreHelper.updateById(Collections.USERS, user.id, {
+                lastLoginAt: new Date(),
+                firebaseUId,
+            });
+        } else {
+            // New user, create user record
+            user = await FirestoreHelper.create(Collections.USERS, {
+                email,
+                name: name || email.split('@')[0],
+                profileImage: picture,
+                role,
+                isVerified: true,
+                firebaseUId,
+                createdAt: new Date(),
+                lastLoginAt: new Date(),
+                subscriptionStatus: 'inactive',
+                subscriptionPlan: 'Basic',
+            });
+        }
+
+        // Create or update user profile based on role
+        let profile = null;
+        if (user.role === 'patient') {
+            const existingProfiles = await FirestoreHelper.findAll(Collections.PATIENTS, { userId: user.id });
+            if (existingProfiles.length === 0) {
+                const patientData = {
+                    userId: user.id,
+                    name: name || user.name || email.split('@')[0],
+                    email,
+                    authorizedDoctors: [],
+                    createdAt: new Date(),
+                };
+                profile = await FirestoreHelper.create(Collections.PATIENTS, patientData);
+            } else {
+                profile = existingProfiles[0];
+            }
+        } else if (user.role === 'doctor') {
+            const existingProfiles = await FirestoreHelper.findAll(Collections.DOCTORS, { userId: user.id });
+            if (existingProfiles.length === 0) {
+                const doctorData = {
+                    userId: user.id,
+                    name: name || user.name || email.split('@')[0],
+                    email,
+                    specialty: 'General',
+                    createdAt: new Date(),
+                };
+                profile = await FirestoreHelper.create(Collections.DOCTORS, doctorData);
+            } else {
+                profile = existingProfiles[0];
+            }
+        }
+
+        const appToken = generateToken(user.id);
+
+        res.status(200).json({
+            success: true,
+            message: 'Google authentication successful!',
+            token: appToken,
+            user: {
+                id: user.id,
+                email: user.email,
+                name: user.name || name,
+                profileImage: user.profileImage || picture,
+                role: user.role,
+                isVerified: true
+            }
+        });
+
+        console.log(`✅ User ${user.id} authenticated via Google Auth`);
+    } catch (error) {
+        console.error('❌ Google Login Error:', error);
+        res.status(500).json({
+            success: false,
+            message: error.message || 'Failed to authenticate with Google.',
         });
     }
 };
