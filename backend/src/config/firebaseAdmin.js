@@ -16,8 +16,12 @@ try {
     console.log('✅ Loaded Firebase credentials from serviceAccountKey.json');
   } else if (process.env.FIREBASE_SERVICE_ACCOUNT) {
     try {
-      // Handle potential multi-line or quoted environment variables
       let envValue = process.env.FIREBASE_SERVICE_ACCOUNT.trim();
+
+      // Fix: If the value accidentally includes the variable name (confirmed from logs!)
+      if (envValue.startsWith('FIREBASE_SERVICE_ACCOUNT=')) {
+        envValue = envValue.replace('FIREBASE_SERVICE_ACCOUNT=', '').trim();
+      }
 
       // If it starts and ends with quotes, remove them
       if (envValue.startsWith('"') && envValue.endsWith('"')) {
@@ -28,6 +32,7 @@ try {
       if (envValue.startsWith('{')) {
         serviceAccount = JSON.parse(envValue);
         if (serviceAccount.private_key) {
+          // CRITICAL: Convert text "\n" into real newlines for Firebase
           serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
         }
         console.log('✅ Loaded Firebase credentials from Environment Variable.');
