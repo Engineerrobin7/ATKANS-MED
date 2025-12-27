@@ -108,7 +108,7 @@ class _PatientDashboardTabState extends ConsumerState<PatientDashboardTab> {
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
             colors: [
-              theme.primaryColor.withOpacity(0.05),
+              theme.primaryColor.withValues(alpha: 0.05),
               theme.scaffoldBackgroundColor,
             ],
           ),
@@ -129,7 +129,7 @@ class _PatientDashboardTabState extends ConsumerState<PatientDashboardTab> {
   Widget _buildDashboard(BuildContext context, Map<String, dynamic>? user, bool isDark) {
     final theme = Theme.of(context);
     final textColor = theme.textTheme.bodyLarge?.color;
-    final subTextColor = theme.textTheme.bodyMedium?.color?.withOpacity(0.7);
+    final subTextColor = theme.textTheme.bodyMedium?.color?.withValues(alpha: 0.7);
 
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
@@ -160,7 +160,7 @@ class _PatientDashboardTabState extends ConsumerState<PatientDashboardTab> {
               ),
               CircleAvatar(
                 radius: 22,
-                backgroundColor: AppTheme.limeGreen.withOpacity(0.2),
+                backgroundColor: AppTheme.limeGreen.withValues(alpha: 0.2),
                 backgroundImage: (user?['profileImage'] != null)
                     ? NetworkImage(user!['profileImage'])
                     : (user?['photoUrl'] != null)
@@ -267,7 +267,7 @@ class _PatientDashboardTabState extends ConsumerState<PatientDashboardTab> {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: color.withOpacity(0.1),
+                color: color.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(icon, color: color, size: 24),
@@ -276,7 +276,7 @@ class _PatientDashboardTabState extends ConsumerState<PatientDashboardTab> {
             Text(title, maxLines: 1, overflow: TextOverflow.ellipsis, 
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: theme.textTheme.bodyLarge?.color)),
             const SizedBox(height: 4),
-            Text('Manage now', style: TextStyle(color: theme.textTheme.bodyMedium?.color?.withOpacity(0.6), fontSize: 11)),
+            Text('Manage now', style: TextStyle(color: theme.textTheme.bodyMedium?.color?.withValues(alpha: 0.6), fontSize: 11)),
           ],
         ),
       ),
@@ -298,7 +298,7 @@ class _PatientDashboardTabState extends ConsumerState<PatientDashboardTab> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.1),
+                  color: color.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(icon, color: color, size: 24),
@@ -309,11 +309,11 @@ class _PatientDashboardTabState extends ConsumerState<PatientDashboardTab> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: theme.textTheme.bodyLarge?.color)),
-                    Text(subtitle, style: TextStyle(color: theme.textTheme.bodyMedium?.color?.withOpacity(0.6), fontSize: 12)),
+                    Text(subtitle, style: TextStyle(color: theme.textTheme.bodyMedium?.color?.withValues(alpha: 0.6), fontSize: 12)),
                   ],
                 ),
               ),
-              Icon(Icons.arrow_forward_ios, size: 14, color: theme.iconTheme.color?.withOpacity(0.5) ?? Colors.grey),
+              Icon(Icons.arrow_forward_ios, size: 14, color: theme.iconTheme.color?.withValues(alpha: 0.5) ?? Colors.grey),
             ],
           ),
         ),

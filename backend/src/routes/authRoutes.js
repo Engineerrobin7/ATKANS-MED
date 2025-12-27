@@ -5,7 +5,8 @@ const {
     getMe,
     requestLoginOTP,
     verifyLoginOTP,
-    firebasePhoneLogin
+    firebasePhoneLogin,
+    googleLogin
 } = require('../controllers/authController');
 const { protect } = require('../middleware/auth');
 
@@ -21,12 +22,14 @@ r.post('/verify-otp', verifyOtp);
  * FIREBASE AUTH
  */
 r.post('/firebase-phone-login', firebasePhoneLogin);
+r.post('/google-login', googleLogin);
 
 /**
  * LOGIN ENDPOINTS
  */
 // Request OTP for login (2FA)
 r.post('/request-login-otp', requestLoginOTP);
+
 
 // Verify login OTP
 r.post('/verify-login-otp', verifyLoginOTP);

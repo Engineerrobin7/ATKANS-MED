@@ -158,7 +158,7 @@ class _OTPVerificationScreenState extends ConsumerState<OTPVerificationScreen>
             center: Alignment.topRight,
             radius: 1.5,
             colors: [
-              Theme.of(context).primaryColor.withOpacity(0.08),
+              Theme.of(context).primaryColor.withValues(alpha: 0.08),
               Colors.black,
               Colors.black,
             ],
@@ -327,15 +327,15 @@ class _OTPVerificationScreenState extends ConsumerState<OTPVerificationScreen>
         border: Border.all(
           color: _focusNodes[index].hasFocus
               ? Theme.of(context).primaryColor
-              : Colors.white.withOpacity(0.2),
+              : Colors.white.withValues(alpha: 0.2),
           width: 2,
         ),
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Colors.white.withOpacity(0.1),
-            Colors.white.withOpacity(0.05),
+            Colors.white.withValues(alpha: 0.1),
+            Colors.white.withValues(alpha: 0.05),
           ],
         ),
       ),

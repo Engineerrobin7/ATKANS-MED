@@ -13,13 +13,39 @@ try {
 
   if (fs.existsSync(serviceAccountKeyPath)) {
     serviceAccount = require(serviceAccountKeyPath);
-    console.log('✅ Loaded Firebase credentials from file.');
+    console.log('✅ Loaded Firebase credentials from serviceAccountKey.json');
   } else if (process.env.FIREBASE_SERVICE_ACCOUNT) {
     try {
-      serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-      console.log('✅ Loaded Firebase credentials from Environment Variable.');
+      // Handle potential multi-line or quoted environment variables
+      let envValue = process.env.FIREBASE_SERVICE_ACCOUNT.trim();
+
+      // If it starts and ends with quotes, remove them
+      if (envValue.startsWith('"') && envValue.endsWith('"')) {
+        envValue = envValue.substring(1, envValue.length - 1);
+      }
+
+      // If it looks like JSON, try to parse it
+      if (envValue.startsWith('{')) {
+        serviceAccount = JSON.parse(envValue);
+        if (serviceAccount.private_key) {
+          serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
+        }
+        console.log('✅ Loaded Firebase credentials from Environment Variable.');
+      } else {
+        // Maybe it's base64 encoded?
+        try {
+          const decoded = Buffer.from(envValue, 'base64').toString('utf-8');
+          if (decoded.startsWith('{')) {
+            serviceAccount = JSON.parse(decoded);
+            console.log('✅ Loaded Firebase credentials from Environment Variable (Base64).');
+          }
+        } catch (e) {
+          // Not base64
+        }
+      }
     } catch (e) {
       console.error('❌ Failed to parse FIREBASE_SERVICE_ACCOUNT environment variable:', e.message);
+      console.error('   Value length:', process.env.FIREBASE_SERVICE_ACCOUNT?.length);
     }
   }
 
@@ -31,13 +57,12 @@ try {
     console.log('✅ Firebase Admin SDK initialized successfully.');
   } else {
     console.warn('⚠️  Firebase Admin SDK not initialized.');
-    console.warn('   - serviceAccountKey.json not found');
+    console.warn('   - serviceAccountKey.json not found in ' + serviceAccountKeyPath);
     console.warn('   - FIREBASE_SERVICE_ACCOUNT env var not set/valid');
-    console.warn('   Server will continue with limited functionality.');
+    console.warn('   Server will fail on Firestore/Auth operations.');
   }
 } catch (error) {
-  console.error('❌ Error initializing Firebase Admin SDK:', error.message);
-  console.warn('   Server will continue in testing mode without Firebase.');
+  console.error('❌ Error during Firebase Admin SDK setup:', error);
 }
 
 module.exports = admin;

@@ -113,7 +113,7 @@ class _PatientSettingsScreenState extends ConsumerState<PatientSettingsScreen> {
     final theme = Theme.of(context);
     final primary = theme.primaryColor;
     final textColor = theme.textTheme.bodyLarge?.color ?? Colors.black;
-    final subTextColor = theme.textTheme.bodyMedium?.color?.withOpacity(0.7) ?? Colors.grey;
+    final subTextColor = theme.textTheme.bodyMedium?.color?.withValues(alpha: 0.7) ?? Colors.grey;
 
     if (user == null) {
       return Center(
@@ -141,7 +141,7 @@ class _PatientSettingsScreenState extends ConsumerState<PatientSettingsScreen> {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            primary.withOpacity(0.05),
+            primary.withValues(alpha: 0.05),
             theme.scaffoldBackgroundColor,
           ],
         ),
@@ -236,9 +236,9 @@ class _PatientSettingsScreenState extends ConsumerState<PatientSettingsScreen> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                       decoration: BoxDecoration(
-                        color: primary.withOpacity(0.1),
+                        color: primary.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: primary.withOpacity(0.3)),
+                        border: Border.all(color: primary.withValues(alpha: 0.3)),
                       ),
                       child: Text(
                         user['subscriptionStatus'] == 'active' ? 'GOLD MEMBER' : 'FREE PLAN',
@@ -374,7 +374,7 @@ class _PatientSettingsScreenState extends ConsumerState<PatientSettingsScreen> {
                   ),
                   style: TextButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 20),
-                    backgroundColor: Colors.redAccent.withOpacity(0.1),
+                    backgroundColor: Colors.redAccent.withValues(alpha: 0.1),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                   ),
                 ),
@@ -420,7 +420,7 @@ class _PatientSettingsScreenState extends ConsumerState<PatientSettingsScreen> {
       leading: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: isDark ? Colors.white.withOpacity(0.05) : Colors.grey[100],
+          color: isDark ? Colors.white.withValues(alpha: 0.05) : Colors.grey[100],
           borderRadius: BorderRadius.circular(12),
         ),
         child: Icon(icon, color: theme.primaryColor, size: 22),
@@ -434,7 +434,7 @@ class _PatientSettingsScreenState extends ConsumerState<PatientSettingsScreen> {
         ),
       ),
       subtitle: subtitle != null
-          ? Text(subtitle, style: TextStyle(color: theme.textTheme.bodyMedium?.color?.withOpacity(0.6), fontSize: 13))
+          ? Text(subtitle, style: TextStyle(color: theme.textTheme.bodyMedium?.color?.withValues(alpha: 0.6), fontSize: 13))
           : null,
       trailing: trailing ?? const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.grey),
       onTap: onTap,
@@ -445,7 +445,7 @@ class _PatientSettingsScreenState extends ConsumerState<PatientSettingsScreen> {
     return Divider(
       height: 1,
       thickness: 1,
-      color: isDark ? Colors.white.withOpacity(0.05) : Colors.grey[200],
+      color: isDark ? Colors.white.withValues(alpha: 0.05) : Colors.grey[200],
       indent: 72,
     );
   }
@@ -459,9 +459,9 @@ class _PatientSettingsScreenState extends ConsumerState<PatientSettingsScreen> {
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: theme.primaryColor.withOpacity(0.1),
+          color: theme.primaryColor.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: theme.primaryColor.withOpacity(0.2)),
+          border: Border.all(color: theme.primaryColor.withValues(alpha: 0.2)),
         ),
         child: Icon(
           isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined,

@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
   return AuthRepository(FirebaseAuth.instance, FirebaseFirestore.instance);
@@ -15,7 +16,51 @@ class AuthRepository {
   Stream<String?> get authStateChanges => _auth.authStateChanges().map((user) => user?.uid);
 
   Future<void> signOut() async {
+    await GoogleSignIn().signOut();
     await _auth.signOut();
+  }
+
+  Future<void> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      if (googleUser == null) {
+        // The user canceled the sign-in
+        return;
+      }
+
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      final userCredential = await _auth.signInWithCredential(credential);
+      final user = userCredential.user;
+
+      if (user != null && userCredential.additionalUserInfo?.isNewUser == true) {
+        await _firestore.collection('users').doc(user.uid).set({
+          'uid': user.uid,
+          'email': user.email,
+          'name': user.displayName,
+          'role': 'Patient', // Default role
+          'phoneNumber': user.phoneNumber,
+          'age': null,
+          'gender': null,
+          'bloodGroup': null,
+          'medicalHistory': '',
+          'createdAt': FieldValue.serverTimestamp(),
+          'subscriptionStatus': 'inactive',
+          'subscriptionPlan': 'Basic',
+          'subscriptionStartDate': null,
+          'subscriptionEndDate': null,
+        });
+      }
+    } catch (e) {
+      // Re-throw the error to be caught by the controller
+      rethrow;
+    }
   }
 
   Future<void> signInWithEmail(String email, String password) async {

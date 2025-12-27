@@ -1,0 +1,55 @@
+Starting a Gradle Daemon, 2 busy and 4 incompatible and 1 stopped Daemons could not be reused, use --status for details
+> Task :gradle:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle:pluginDescriptors UP-TO-DATE
+> Task :gradle:processResources UP-TO-DATE
+> Task :gradle:compileKotlin
+w: file:///C:/flutter/packages/flutter_tools/gradle/src/main/kotlin/FlutterPlugin.kt:11:37 'ApkVariant' is deprecated. Deprecated in Java
+w: file:///C:/flutter/packages/flutter_tools/gradle/src/main/kotlin/FlutterPlugin.kt:609:69 'ApkVariant' is deprecated. Deprecated in Java
+w: file:///C:/flutter/packages/flutter_tools/gradle/src/main/kotlin/plugins/PluginHandler.kt:186:64 Unchecked cast: NamedDomainObjectContainer<out BuildType> to NamedDomainObjectContainer<BuildType>
+w: file:///C:/flutter/packages/flutter_tools/gradle/src/main/kotlin/plugins/PluginHandler.kt:187:69 Unchecked cast: NamedDomainObjectContainer<out BuildType> to NamedDomainObjectContainer<BuildType>
+
+> Task :gradle:compileJava NO-SOURCE
+> Task :gradle:compileGroovy NO-SOURCE
+> Task :gradle:classes UP-TO-DATE
+> Task :gradle:jar UP-TO-DATE
+
+> Task :app:signingReport
+Variant: debug
+Config: debug
+Store: C:\Users\ROBIN\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 22:E2:CB:5A:90:48:C1:DB:FA:AA:29:A6:BD:6F:A9:6E
+SHA1: BB:F2:EF:6C:BD:85:31:71:B0:FB:3C:CE:D4:0F:68:62:17:21:1E:4C
+SHA-256: F9:56:8C:A5:90:EE:4C:0E:3B:36:D2:11:92:77:BB:0F:E2:E6:99:0A:DD:EB:7B:1B:73:BB:99:B1:34:98:05:31
+Valid until: Thursday, July 29, 2055
+----------
+Variant: release
+Config: debug
+Store: C:\Users\ROBIN\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 22:E2:CB:5A:90:48:C1:DB:FA:AA:29:A6:BD:6F:A9:6E
+SHA1: BB:F2:EF:6C:BD:85:31:71:B0:FB:3C:CE:D4:0F:68:62:17:21:1E:4C
+SHA-256: F9:56:8C:A5:90:EE:4C:0E:3B:36:D2:11:92:77:BB:0F:E2:E6:99:0A:DD:EB:7B:1B:73:BB:99:B1:34:98:05:31
+Valid until: Thursday, July 29, 2055
+----------
+Variant: profile
+Config: debug
+Store: C:\Users\ROBIN\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 22:E2:CB:5A:90:48:C1:DB:FA:AA:29:A6:BD:6F:A9:6E
+SHA1: BB:F2:EF:6C:BD:85:31:71:B0:FB:3C:CE:D4:0F:68:62:17:21:1E:4C
+SHA-256: F9:56:8C:A5:90:EE:4C:0E:3B:36:D2:11:92:77:BB:0F:E2:E6:99:0A:DD:EB:7B:1B:73:BB:99:B1:34:98:05:31
+Valid until: Thursday, July 29, 2055
+----------
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\ROBIN\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 22:E2:CB:5A:90:48:C1:DB:FA:AA:29:A6:BD:6F:A9:6E
+SHA1: BB:F2:EF:6C:BD:85:31:71:B0:FB:3C:CE:D4:0F:68:62:17:21:1E:4C
+SHA-256: F9:56:8C:A5:90:EE:4C:0E:3B:36:D2:11:92:77:BB:0F:E2:E6:99:0A:DD:EB:7B:1B:73:BB:99:B1:34:98:05:31
+Valid until: Thursday, July 29, 2055
+----------
+
+BUILD SUCCESSFUL in 1m 45s
+5 actionable tasks: 2 executed, 3 up-to-date

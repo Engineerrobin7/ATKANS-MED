@@ -306,7 +306,7 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
                 padding: const EdgeInsets.all(12),
                 margin: const EdgeInsets.only(bottom: 15),
                 decoration: BoxDecoration(
-                  color: Colors.red.withOpacity(0.1),
+                  color: Colors.red.withValues(alpha: 0.1),
                   border: Border.all(color: Colors.red),
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -322,7 +322,7 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
                 padding: const EdgeInsets.all(12),
                 margin: const EdgeInsets.only(bottom: 15),
                 decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.1),
+                  color: Colors.green.withValues(alpha: 0.1),
                   border: Border.all(color: Colors.green),
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -403,12 +403,12 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
                                 border: Border.all(
                                   color: _selectedMethod == 'email'
                                       ? Colors.teal
-                                      : Colors.grey.withOpacity(0.3),
+                                      : Colors.grey.withValues(alpha: 0.3),
                                   width: 2,
                                 ),
                                 borderRadius: BorderRadius.circular(8),
                                 color: _selectedMethod == 'email'
-                                    ? Colors.teal.withOpacity(0.1)
+                                    ? Colors.teal.withValues(alpha: 0.1)
                                     : Colors.transparent,
                               ),
                               child: Column(
@@ -439,12 +439,12 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
                                 border: Border.all(
                                   color: _selectedMethod == 'phone'
                                       ? Colors.teal
-                                      : Colors.grey.withOpacity(0.3),
+                                      : Colors.grey.withValues(alpha: 0.3),
                                   width: 2,
                                 ),
                                 borderRadius: BorderRadius.circular(8),
                                 color: _selectedMethod == 'phone'
-                                    ? Colors.teal.withOpacity(0.1)
+                                    ? Colors.teal.withValues(alpha: 0.1)
                                     : Colors.transparent,
                               ),
                               child: Column(
@@ -457,7 +457,7 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
                                     'SMS',
                                     style: TextStyle(
                                       fontSize: 12,
-                                      color: Colors.grey.withOpacity(0.7),
+                                      color: Colors.grey.withValues(alpha: 0.7),
                                     ),
                                   ),
                                 ],
@@ -516,7 +516,7 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
                   onPressed: _isLoading ? null : _sendOTP,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.teal,
-                    disabledBackgroundColor: Colors.grey.withOpacity(0.5),
+                    disabledBackgroundColor: Colors.grey.withValues(alpha: 0.5),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -590,7 +590,7 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
                   onPressed: _isLoading ? null : _verifyOTP,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.teal,
-                    disabledBackgroundColor: Colors.grey.withOpacity(0.5),
+                    disabledBackgroundColor: Colors.grey.withValues(alpha: 0.5),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),

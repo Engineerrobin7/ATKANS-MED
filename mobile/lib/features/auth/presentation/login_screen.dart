@@ -273,6 +273,30 @@ class _LoginScreenState extends ConsumerState<LoginScreen> with SingleTickerProv
                 : const Text('Sign In', style: TextStyle(fontWeight: FontWeight.bold)),
           ),
         ),
+        const SizedBox(height: 16),
+        SizedBox(
+          width: double.infinity,
+          height: 60,
+          child: ElevatedButton.icon(
+            onPressed: isLoading ? null : () {
+              ref.read(authControllerProvider.notifier).signInWithGoogle();
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white,
+              foregroundColor: Colors.black,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+            ),
+            icon: Image.asset('assets/icons/google.png', height: 24), // Ensure you have this asset
+            label: const Text('Sign in with Google'),
+          ),
+        ),
+        const SizedBox(height: 16),
+        TextButton(
+          onPressed: isLoading ? null : () {
+            ref.read(authControllerProvider.notifier).signOut();
+          },
+          child: const Text('Sign Out', style: TextStyle(color: AppTheme.limeGreen)),
+        ),
       ],
     );
   }

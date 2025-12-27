@@ -54,7 +54,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDo-oKdImoEqPzFT3vwGTJ5j6x74bXcWjc',
-    appId: '1:339895708806:android:60a63440d1fe78f0e3b507',
+    appId: '1:339895708806:android:8700b511bfbd54cae3b507',
     messagingSenderId: '339895708806',
     projectId: 'atkans-med',
     storageBucket: 'atkans-med.firebasestorage.app',
