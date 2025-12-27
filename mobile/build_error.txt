@@ -1,0 +1,78 @@
+Running Gradle task 'assembleDebug'...                          
+lib/features/chat/presentation/screens/chat_room_screen.dart:6:8: Error: Error when reading 'lib/features/chat/presentation/data/chat_repository.dart': The system cannot find the path specified.
+
+import '../data/chat_repository.dart';
+       ^
+lib/features/chat/presentation/screens/chat_room_screen.dart:7:8: Error: Error when reading 'lib/features/chat/presentation/domain/models/message_model.dart': The system cannot find the path specified.
+
+import '../domain/models/message_model.dart';
+       ^
+lib/features/patient/data/medical_reports_repository.dart:9:8: Error: Error when reading 'lib/core/utils/app_logger.dart': The system cannot find the file specified.
+
+import 'package:mobile/core/utils/app_logger.dart'; // Assuming an AppLogger utility exists
+       ^
+lib/features/chat/presentation/screens/chat_room_screen.dart:153:30: Error: Type 'MessageModel' not found.
+  Widget _buildMessageBubble(MessageModel message, bool isMe) {
+                             ^^^^^^^^^^^^
+lib/features/chat/presentation/screens/chat_room_screen.dart:41:29: Error: The getter 'chatRepositoryProvider' isn't defined for the type '_ChatRoomScreenState'.
+ - '_ChatRoomScreenState' is from 'package:mobile/features/chat/presentation/screens/chat_room_screen.dart' ('lib/features/chat/presentation/screens/chat_room_screen.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'chatRepositoryProvider'.
+    final chatId = ref.read(chatRepositoryProvider).getChatId(currentUser.uid, widget.receiverId);
+                            ^^^^^^^^^^^^^^^^^^^^^^
+lib/features/chat/presentation/screens/chat_room_screen.dart:43:21: Error: The method 'MessageModel' isn't defined for the type '_ChatRoomScreenState'.
+ - '_ChatRoomScreenState' is from 'package:mobile/features/chat/presentation/screens/chat_room_screen.dart' ('lib/features/chat/presentation/screens/chat_room_screen.dart').
+Try correcting the name to the name of an existing method, or defining a method named 'MessageModel'.
+    final message = MessageModel(
+                    ^^^^^^^^^^^^
+lib/features/chat/presentation/screens/chat_room_screen.dart:51:14: Error: The getter 'chatRepositoryProvider' isn't defined for the type '_ChatRoomScreenState'.
+ - '_ChatRoomScreenState' is from 'package:mobile/features/chat/presentation/screens/chat_room_screen.dart' ('lib/features/chat/presentation/screens/chat_room_screen.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'chatRepositoryProvider'.
+    ref.read(chatRepositoryProvider).sendMessage(chatId, message);
+             ^^^^^^^^^^^^^^^^^^^^^^
+lib/features/chat/presentation/screens/chat_room_screen.dart:127:39: Error: 'MessageModel' isn't a type.
+            child: StreamBuilder<List<MessageModel>>(
+                                      ^^^^^^^^^^^^
+lib/features/chat/presentation/screens/chat_room_screen.dart:95:30: Error: The getter 'chatRepositoryProvider' isn't defined for the type '_ChatRoomScreenState'.
+ - '_ChatRoomScreenState' is from 'package:mobile/features/chat/presentation/screens/chat_room_screen.dart' ('lib/features/chat/presentation/screens/chat_room_screen.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'chatRepositoryProvider'.
+    final chatId = ref.watch(chatRepositoryProvider).getChatId(currentUser.uid, widget.receiverId);
+                             ^^^^^^^^^^^^^^^^^^^^^^
+lib/features/chat/presentation/screens/chat_room_screen.dart:96:38: Error: The getter 'chatRepositoryProvider' isn't defined for the type '_ChatRoomScreenState'.
+ - '_ChatRoomScreenState' is from 'package:mobile/features/chat/presentation/screens/chat_room_screen.dart' ('lib/features/chat/presentation/screens/chat_room_screen.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'chatRepositoryProvider'.
+    final messagesStream = ref.watch(chatRepositoryProvider).getMessages(chatId);
+                                     ^^^^^^^^^^^^^^^^^^^^^^
+lib/features/chat/presentation/screens/chat_room_screen.dart:153:30: Error: 'MessageModel' isn't a type.
+  Widget _buildMessageBubble(MessageModel message, bool isMe) {
+                             ^^^^^^^^^^^^
+lib/features/admin/presentation/admin_dashboard_screen.dart:133:31: Error: Not a constant expression.
+            child: const Icon(icon, color: AppTheme.limeGreen, size: 24),
+                              ^^^^
+lib/features/patient/data/medical_reports_repository.dart:54:7: Error: The getter 'AppLogger' isn't defined for the type 'MedicalReportsRepository'.
+ - 'MedicalReportsRepository' is from 'package:mobile/features/patient/data/medical_reports_repository.dart' ('lib/features/patient/data/medical_reports_repository.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'AppLogger'.
+      AppLogger.logInfo('Report uploaded successfully: $title');
+      ^^^^^^^^^
+lib/features/patient/data/medical_reports_repository.dart:56:7: Error: The getter 'AppLogger' isn't defined for the type 'MedicalReportsRepository'.
+ - 'MedicalReportsRepository' is from 'package:mobile/features/patient/data/medical_reports_repository.dart' ('lib/features/patient/data/medical_reports_repository.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'AppLogger'.
+      AppLogger.logError('Error uploading report: $e', error: e, stackTrace: stack);
+      ^^^^^^^^^
+Target kernel_snapshot_program failed: Exception
+
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:compileFlutterBuildDebug'.
+> Process 'command 'C:\flutter\bin\flutter.bat'' finished with non-zero exit value 1
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 11s
+Running Gradle task 'assembleDebug'...                             11.7s
+Gradle task assembleDebug failed with exit code 1

@@ -1,0 +1,51 @@
+Analyzing mobile...                                             
+
+   info - 'background' is deprecated and shouldn't be used. Use surface instead. This feature was deprecated after v3.18.0-0.1.pre - lib\core\theme\app_theme.dart:36:9 - deprecated_member_use
+   info - 'onBackground' is deprecated and shouldn't be used. Use onSurface instead. This feature was deprecated after v3.18.0-0.1.pre - lib\core\theme\app_theme.dart:41:9 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\theme\app_theme.dart:63:50 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\theme\app_theme.dart:69:51 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\theme\app_theme.dart:70:50 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\theme\app_theme.dart:77:54 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\widgets\glass_card.dart:37:46 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\widgets\glass_card.dart:44:26 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\widgets\glass_card.dart:45:26 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\widgets\glass_card.dart:50:51 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\widgets\glass_card.dart:67:32 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\widgets\glass_card.dart:68:32 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\widgets\tilt_3d_card.dart:69:61 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\widgets\tilt_3d_card.dart:74:58 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\admin\presentation\admin_dashboard_screen.dart:59:56 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\admin\presentation\admin_dashboard_screen.dart:85:30 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\admin\presentation\admin_dashboard_screen.dart:167:24 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\admin\presentation\admin_dashboard_screen.dart:167:48 - deprecated_member_use
+  error - Expected to find '}' - lib\features\auth\data\auth_repository.dart:49:3 - expected_token
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\features\auth\presentation\login_screen.dart:221:11 - deprecated_member_use
+warning - Unused import: '../../../core/widgets/glass_card.dart' - lib\features\auth\presentation\otp_verification_screen.dart:6:8 - unused_import
+warning - The declaration '_clearOTP' isn't referenced - lib\features\auth\presentation\otp_verification_screen.dart:115:8 - unused_element
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\auth\presentation\otp_verification_screen.dart:164:46 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\auth\presentation\otp_verification_screen.dart:333:30 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\auth\presentation\otp_verification_screen.dart:340:26 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\auth\presentation\otp_verification_screen.dart:341:26 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\features\auth\presentation\signup_screen.dart:99:19 - deprecated_member_use
+warning - Unused import: 'package:lottie/lottie.dart' - lib\features\auth\presentation\splash_screen.dart:3:8 - unused_import
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\auth\presentation\splash_screen.dart:62:46 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\auth\presentation\splash_screen.dart:83:65 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\auth\presentation\splash_screen.dart:106:75 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\doctor\presentation\doctor_home_screen.dart:51:46 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\doctor\presentation\doctor_home_screen.dart:67:61 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\doctor\presentation\doctor_home_screen.dart:157:52 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\doctor\presentation\doctor_home_screen.dart:185:54 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\doctor\presentation\doctor_home_screen.dart:214:52 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\doctor\presentation\doctor_home_screen.dart:381:59 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\doctor\presentation\doctor_home_screen.dart:447:42 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\doctor\presentation\patient_search_screen.dart:170:61 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\doctor\presentation\patient_search_screen.dart:307:34 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\doctor\presentation\patient_search_screen.dart:309:53 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\executive\presentation\executive_home_screen.dart:119:52 - deprecated_member_use
+warning - The value of the local variable 'theme' isn't used - lib\features\patient\presentation\screens\patient_home_screen.dart:131:11 - unused_local_variable
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\patient\presentation\screens\patient_home_screen.dart:144:46 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\patient\presentation\screens\patient_prescriptions_screen.dart:66:58 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\patient\presentation\screens\patient_prescriptions_screen.dart:66:89 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\patient\presentation\screens\patient_timeline_screen.dart:43:63 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\patient\presentation\screens\patient_timeline_screen.dart:45:82 - deprecated_member_use
+

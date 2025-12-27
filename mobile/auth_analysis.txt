@@ -1,0 +1,14 @@
+Analyzing auth...                                               
+
+warning - Unused import: '../../../core/theme/app_theme.dart' - lib\features\auth\presentation\login_screen.dart:5:8 - unused_import
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\features\auth\presentation\login_screen.dart:195:11 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\auth\presentation\otp_verification_screen.dart:157:46 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\auth\presentation\otp_verification_screen.dart:366:30 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\auth\presentation\otp_verification_screen.dart:373:26 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\auth\presentation\otp_verification_screen.dart:374:26 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\features\auth\presentation\signup_screen.dart:99:19 - deprecated_member_use
+warning - Unused import: 'package:lottie/lottie.dart' - lib\features\auth\presentation\splash_screen.dart:3:8 - unused_import
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\auth\presentation\splash_screen.dart:62:46 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\auth\presentation\splash_screen.dart:83:65 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\auth\presentation\splash_screen.dart:106:75 - deprecated_member_use
+

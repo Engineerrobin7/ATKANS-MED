@@ -1,0 +1,67 @@
+name: mobile
+description: "ATKANS MED - Medical Records Management"
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State Management
+  flutter_riverpod: ^2.6.1
+
+  # Navigation
+  go_router: ^17.0.1
+
+  # Local Storage
+  shared_preferences: ^2.3.4
+
+  # UI Components & Styling
+  flutter_svg: ^2.0.16
+  google_fonts: ^6.2.1
+
+  # Utilities
+  intl: ^0.20.1
+  uuid: ^4.5.2
+
+  # File Handling
+  file_picker: ^8.1.6
+  image_picker: ^1.1.2
+
+  # Animations & UI Effects
+  lottie: ^3.2.0
+  shimmer: ^3.0.0
+  animated_text_kit: ^4.2.2
+  confetti: ^0.7.0
+  fl_chart: ^0.69.0
+
+  # Firebase
+  firebase_core: ^3.8.1
+  firebase_auth: ^5.3.3
+  cloud_firestore: ^5.5.1
+  firebase_storage: ^12.3.7
+  cloud_functions: ^5.2.1
+  firebase_messaging: ^15.1.5
+  razorpay_flutter: ^1.4.0
+  http: ^1.6.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: "ic_launcher"
+  ios: true
+  image_path: "assets/images/logo.png"
+  min_sdk_android: 21
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/icons/
