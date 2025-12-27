@@ -1,6 +1,7 @@
 const Razorpay = require('razorpay');
 const { FirestoreHelper, Collections } = require('../config/firestore');
 const crypto = require('crypto');
+const User = require('../models/User');
 
 // Lazy initialization of Razorpay
 let razorpay = null;

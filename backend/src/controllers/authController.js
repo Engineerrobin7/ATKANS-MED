@@ -417,6 +417,126 @@ exports.verifyLoginOTP = async (req, res) => {
     }
 };
 
+const admin = require('../config/firebaseAdmin');
+
+// @desc    Login or Register user via Firebase Phone Auth
+// @route   POST /api/auth/firebase-phone-login
+// @access  Public
+exports.firebasePhoneLogin = async (req, res) => {
+    const { idToken, role = 'patient', name } = req.body;
+
+    if (!idToken) {
+        return res.status(400).json({
+            success: false,
+            message: 'Firebase ID token is required.',
+        });
+    }
+
+    try {
+        // Verify the ID token
+        const decodedToken = await admin.auth().verifyIdToken(idToken);
+        const { phone_number: phone, uid: firebaseUId } = decodedToken;
+
+        if (!phone) {
+            return res.status(400).json({
+                success: false,
+                message: 'Phone number not found in Firebase token.',
+            });
+        }
+
+        let user;
+        const existingUsers = await FirestoreHelper.findAll(Collections.USERS, { phone });
+
+        if (existingUsers.length > 0) {
+            // User exists, update last login and firebase UID
+            user = existingUsers[0];
+            await FirestoreHelper.updateById(Collections.USERS, user.id, {
+                lastLoginAt: new Date(),
+                firebaseUId, // Store or update Firebase UID
+            });
+        } else {
+            // User does not exist, create a new user
+            user = await FirestoreHelper.create(Collections.USERS, {
+                phone,
+                role,
+                isVerified: true,
+                firebaseUId, // Store Firebase UID
+                createdAt: new Date(),
+                lastLoginAt: new Date(),
+            });
+        }
+        
+        // Create or update user profile based on role
+        let profile = null;
+        if (user.role === 'patient') {
+            const existingProfiles = await FirestoreHelper.findAll(Collections.PATIENTS, { userId: user.id });
+            if (existingProfiles.length === 0 && name) {
+                const patientData = {
+                    userId: user.id,
+                    name,
+                    authorizedDoctors: [],
+                    createdAt: new Date(),
+                    phone,
+                };
+                profile = await FirestoreHelper.create(Collections.PATIENTS, patientData);
+            } else if (existingProfiles.length > 0) {
+                profile = existingProfiles[0];
+            }
+        } else if (user.role === 'doctor') {
+            const existingProfiles = await FirestoreHelper.findAll(Collections.DOCTORS, { userId: user.id });
+            if (existingProfiles.length === 0 && name) {
+                const doctorData = {
+                    userId: user.id,
+                    name,
+                    specialty: 'General',
+                    createdAt: new Date(),
+                    phone
+                };
+                profile = await FirestoreHelper.create(Collections.DOCTORS, doctorData);
+            } else if (existingProfiles.length > 0) {
+                profile = existingProfiles[0];
+            }
+        }
+
+
+        // Generate our own app-specific JWT token
+        const appToken = generateToken(user.id);
+
+        res.status(200).json({
+            success: true,
+            message: 'Authentication successful!',
+            token: appToken,
+            user: {
+                id: user.id,
+                phone: user.phone,
+                role: user.role,
+                isVerified: user.isVerified,
+                name: profile ? profile.name : undefined,
+            },
+        });
+
+        console.log(`✅ User ${user.id} authenticated via Firebase Phone Auth`);
+    } catch (error) {
+        console.error('❌ Firebase Phone Login Error:', error);
+        if (error.code === 'auth/id-token-expired') {
+            return res.status(401).json({
+                success: false,
+                message: 'Firebase token has expired. Please log in again.',
+            });
+        }
+        if (error.code === 'auth/argument-error') {
+            return res.status(401).json({
+                success: false,
+                message: 'Invalid Firebase token.',
+            });
+        }
+        res.status(500).json({
+            success: false,
+            message: error.message || 'Failed to authenticate with Firebase.',
+        });
+    }
+};
+
 // @desc    Get Current User Profile
 // @route   GET /api/auth/me
 // @access  Private

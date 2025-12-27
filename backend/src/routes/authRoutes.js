@@ -4,20 +4,23 @@ const {
     verifyOtp, 
     getMe,
     requestLoginOTP,
-    verifyLoginOTP
+    verifyLoginOTP,
+    firebasePhoneLogin
 } = require('../controllers/authController');
 const { protect } = require('../middleware/auth');
 
 const r = express.Router();
 
 /**
- * REGISTRATION/SIGNUP ENDPOINTS
+ * CUSTOM OTP (EMAIL/SMS)
  */
-// Send OTP for registration
 r.post('/send-otp', sendOtp);
-
-// Verify OTP and complete registration
 r.post('/verify-otp', verifyOtp);
+
+/**
+ * FIREBASE AUTH
+ */
+r.post('/firebase-phone-login', firebasePhoneLogin);
 
 /**
  * LOGIN ENDPOINTS
