@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+
+router.get('/', (req, res) => res.json({ message: 'Reports module is active' }));
 const multer = require('multer');
 const path = require('path');
 const { uploadReport, getReports } = require('../controllers/reportController');
