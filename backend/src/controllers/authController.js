@@ -135,14 +135,27 @@ exports.sendOtp = async (req, res) => {
             }
 
             // Send SMS OTP
-            const smsSent = await sendOTP(phone, otp, 'sms');
-            if (!smsSent) {
-                return res.status(500).json({
-                    success: false,
-                    message: 'Failed to send SMS OTP. Please ensure Twilio is configured or use email login.'
+            try {
+                const smsSent = await sendOTP(phone, otp, 'sms');
+                if (!smsSent) {
+                    console.warn(`⚠️ SMS failed (Twilio likely not configured), but OTP is generated: [${otp}]`);
+                    return res.status(200).json({
+                        success: true,
+                        message: 'DEBUG MODE: SMS failed to send. Please check Render logs for the OTP code.',
+                        expiresIn: parseInt(process.env.OTP_EXPIRY_MINUTES || '10'),
+                        isTestMode: true
+                    });
+                }
+                console.log(`📱 OTP (${otp}) sent to phone: ${phone}`);
+            } catch (smsError) {
+                console.warn(`⚠️ SMS Error: ${smsError.message}. OTP is generated: [${otp}]`);
+                return res.status(200).json({
+                    success: true,
+                    message: 'DEBUG MODE: SMS error. Please check Render logs for the OTP code.',
+                    expiresIn: parseInt(process.env.OTP_EXPIRY_MINUTES || '10'),
+                    isTestMode: true
                 });
             }
-            console.log(`📱 OTP (${otp}) sent to phone: ${phone}`);
         }
 
         res.status(200).json({
