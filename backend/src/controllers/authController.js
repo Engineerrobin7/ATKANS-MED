@@ -135,7 +135,13 @@ exports.sendOtp = async (req, res) => {
             }
 
             // Send SMS OTP
-            await sendOTP(phone, otp, 'sms');
+            const smsSent = await sendOTP(phone, otp, 'sms');
+            if (!smsSent) {
+                return res.status(500).json({
+                    success: false,
+                    message: 'Failed to send SMS OTP. Please ensure Twilio is configured or use email login.'
+                });
+            }
             console.log(`📱 OTP (${otp}) sent to phone: ${phone}`);
         }
 
@@ -547,6 +553,15 @@ exports.firebasePhoneLogin = async (req, res) => {
         console.log(`✅ User ${user.id} authenticated via Firebase Phone Auth`);
     } catch (error) {
         console.error('❌ Firebase Phone Login Error:', error);
+
+        // Specific check for Firebase Credential issues (revoked key)
+        if (error.message.includes('unauthenticated') || error.code === 16 || error.message.includes('credential')) {
+            return res.status(401).json({
+                success: false,
+                message: 'Internal Server Error: Firebase credentials are invalid or revoked. Please update the service account key on the server.'
+            });
+        }
+
         if (error.code === 'auth/id-token-expired') {
             return res.status(401).json({
                 success: false,
