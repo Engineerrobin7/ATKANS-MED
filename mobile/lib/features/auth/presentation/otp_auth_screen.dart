@@ -292,6 +292,39 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
     }
   }
 
+  Future<void> _testConnection() async {
+    setState(() {
+      _isLoading = true;
+      _errorMessage = null;
+      _successMessage = null;
+    });
+
+    try {
+      final url = Uri.parse('${ApiConstants.authUrl}/ping');
+      print('🚀 Pinging backend at: $url');
+      
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+      ).timeout(const Duration(seconds: 10));
+
+      setState(() {
+        _isLoading = false;
+        if (response.statusCode == 200) {
+          _successMessage = 'Backend is REACHABLE! 🎉';
+        } else {
+          _errorMessage = 'Server Response: ${response.statusCode}\nBody: ${response.body}';
+        }
+      });
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+        _errorMessage = 'Full Connection Error: $e';
+      });
+      print('❌ Connection Error Detail: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -299,6 +332,13 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
         title: const Text('ATKANS MED - Login'),
         centerTitle: true,
         elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.network_check),
+            onPressed: _testConnection,
+            tooltip: 'Test Connection',
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
