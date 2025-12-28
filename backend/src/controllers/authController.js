@@ -89,8 +89,19 @@ exports.sendOtp = async (req, res) => {
             }
 
             // Send email OTP
-            await sendOTP(email, otp, 'email', email.split('@')[0]);
-            console.log(`📧 OTP (${otp}) sent to email: ${email}`);
+            try {
+                await sendOTP(email, otp, 'email', email.split('@')[0]);
+                console.log(`📧 OTP (${otp}) sent to email: ${email}`);
+            } catch (mailError) {
+                console.error(`⚠️ Email blocked by Render, but OTP is generated: [${otp}]`);
+                // We return 200 anyway so the developer can see the OTP in Render logs and type it in the app
+                return res.status(200).json({
+                    success: true,
+                    message: 'DEBUG MODE: Email blocked by server provider. Please check Render logs for the OTP code.',
+                    expiresIn: parseInt(process.env.OTP_EXPIRY_MINUTES || '10'),
+                    isTestMode: true
+                });
+            }
         }
         // Handle phone-based OTP
         else if (phone && method === 'sms') {
