@@ -4,8 +4,8 @@ const otpGenerator = require('otp-generator');
 // Configure Nodemailer transporter for email
 const emailTransporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST || 'smtp.gmail.com',
-    port: parseInt(process.env.EMAIL_PORT || '587'),
-    secure: process.env.EMAIL_SECURE === 'true', // true for 465, false for 587
+    port: parseInt(process.env.EMAIL_PORT || '465'),
+    secure: process.env.EMAIL_SECURE !== 'false', // true by default, false only if explicitly 'false'
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
