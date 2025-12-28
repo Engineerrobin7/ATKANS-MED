@@ -61,4 +61,4 @@ flutter run
 - [ ] Doctor Appointment Integration
 
 ---
-© 2024 ATKANS MED. All rights reserved.
+© 2025 ATKANS MED. All rights reserved.
