@@ -8,8 +8,8 @@ const https = require('https');
 const sendViaResend = (mailOptions) => {
     return new Promise((resolve, reject) => {
         const data = JSON.stringify({
-            from: 'Atkans Med <onboarding@resend.dev>', // You can update this after verifying a domain
-            to: [mailOptions.to],
+            from: 'onboarding@resend.dev',
+            to: mailOptions.to,
             subject: mailOptions.subject,
             html: mailOptions.html,
         });
@@ -22,7 +22,7 @@ const sendViaResend = (mailOptions) => {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
-                'Content-Length': data.length,
+                'Content-Length': Buffer.byteLength(data),
             },
         };
 
