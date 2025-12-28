@@ -78,12 +78,20 @@ const sendOTPEmail = async (email, otp, userName = 'User') => {
             text: `Your ATKANS MED verification code is: ${otp}\n\nThis code will expire in ${process.env.OTP_EXPIRY_MINUTES || 10} minutes.\n\nIf you didn't request this code, please ignore this email.`,
         };
 
-        await emailTransporter.sendMail(mailOptions);
+        // Send email with a 10-second timeout
+        const sendEmailPromise = emailTransporter.sendMail(mailOptions);
+        const timeoutPromise = new Promise((_, reject) =>
+            setTimeout(() => reject(new Error('Email sending timed out')), 10000)
+        );
+
+        await Promise.race([sendEmailPromise, timeoutPromise]);
+
         console.log(`✉️  OTP email sent successfully to ${email}`);
         return true;
     } catch (error) {
         console.error(`❌ Error sending OTP email to ${email}:`, error.message);
-        throw new Error('Failed to send OTP email');
+        // Important: Still return false or throw so the controller knows it failed
+        throw new Error('Email delivery failed: ' + error.message);
     }
 };
 
