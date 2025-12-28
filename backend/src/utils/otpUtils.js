@@ -1,23 +1,57 @@
 const nodemailer = require('nodemailer');
 const otpGenerator = require('otp-generator');
+const https = require('https');
 
-// Configure Nodemailer transporter for email
-// Using Port 587 with STARTTLS is often more reliable on cloud platforms like Render
+/**
+ * Sends mail via Resend API (Bypasses SMTP port blocks)
+ */
+const sendViaResend = (mailOptions) => {
+    return new Promise((resolve, reject) => {
+        const data = JSON.stringify({
+            from: 'Atkans Med <onboarding@resend.dev>', // You can update this after verifying a domain
+            to: [mailOptions.to],
+            subject: mailOptions.subject,
+            html: mailOptions.html,
+        });
+
+        const options = {
+            hostname: 'api.resend.com',
+            port: 443,
+            path: '/emails',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+                'Content-Length': data.length,
+            },
+        };
+
+        const req = https.request(options, (res) => {
+            let responseData = '';
+            res.on('data', (chunk) => { responseData += chunk; });
+            res.on('end', () => {
+                if (res.statusCode >= 200 && res.statusCode < 300) {
+                    resolve(true);
+                } else {
+                    reject(new Error(`Resend API Error: ${responseData}`));
+                }
+            });
+        });
+
+        req.on('error', (error) => reject(error));
+        req.write(data);
+        req.end();
+    });
+};
+
+// Configure Nodemailer transporter (Fallback for local dev)
 const emailTransporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false, // true for 465, false for other ports
+    service: 'gmail',
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
     },
-    tls: {
-        // Do not fail on invalid certificates (helps on some cloud networks)
-        rejectUnauthorized: false
-    }
 });
-
-// We removed the verify call as it can cause hangs on startup in some environments
 
 
 /**
@@ -43,7 +77,7 @@ const generateOTP = (length = parseInt(process.env.OTP_LENGTH || '6')) => {
 const sendOTPEmail = async (email, otp, userName = 'User') => {
     try {
         const mailOptions = {
-            from: process.env.EMAIL_FROM || process.env.EMAIL_USER,
+            from: process.env.EMAIL_FROM || process.env.EMAIL_USER || 'onboarding@resend.dev',
             to: email,
             subject: '🔐 Your ATKANS MED Verification Code',
             html: `
@@ -77,19 +111,26 @@ const sendOTPEmail = async (email, otp, userName = 'User') => {
             text: `Your ATKANS MED verification code is: ${otp}\n\nThis code will expire in ${process.env.OTP_EXPIRY_MINUTES || 10} minutes.\n\nIf you didn't request this code, please ignore this email.`,
         };
 
-        // Send email with a 10-second timeout
+        // PRIORITY 1: Resend API (Best for Render/Production)
+        if (process.env.RESEND_API_KEY) {
+            console.log('📬  Attempting to send OTP via Resend API...');
+            await sendViaResend(mailOptions);
+            console.log(`✉️  OTP email sent via Resend API to ${email}`);
+            return true;
+        }
+
+        // PRIORITY 2: Nodemailer/Gmail (Fallback for Local Dev)
+        console.log('📬  Attempting to send OTP via SMTP Fallback...');
         const sendEmailPromise = emailTransporter.sendMail(mailOptions);
         const timeoutPromise = new Promise((_, reject) =>
-            setTimeout(() => reject(new Error('Email sending timed out')), 10000)
+            setTimeout(() => reject(new Error('SMTP sending timed out')), 10000)
         );
 
         await Promise.race([sendEmailPromise, timeoutPromise]);
-
-        console.log(`✉️  OTP email sent successfully to ${email}`);
+        console.log(`✉️  OTP email sent via SMTP to ${email}`);
         return true;
     } catch (error) {
         console.error(`❌ Error sending OTP email to ${email}:`, error.message);
-        // Important: Still return false or throw so the controller knows it failed
         throw new Error('Email delivery failed: ' + error.message);
     }
 };
