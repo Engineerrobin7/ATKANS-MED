@@ -10,7 +10,7 @@ const sendViaBrevo = (mailOptions) => {
         const data = JSON.stringify({
             sender: {
                 name: 'ATKANS MED',
-                email: process.env.EMAIL_USER // Uses your validated Gmail as the sender
+                email: process.env.BREVO_SENDER_EMAIL || process.env.EMAIL_USER
             },
             to: [{ email: mailOptions.to }],
             subject: mailOptions.subject,
