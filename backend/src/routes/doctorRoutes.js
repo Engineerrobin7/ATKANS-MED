@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+
+router.get('/', (req, res) => res.json({ message: 'Doctor module is active' }));
 const { requestAccess, addPrescription, getPrescriptions } = require('../controllers/doctorController');
 const { protect, authorize } = require('../middleware/auth');
 

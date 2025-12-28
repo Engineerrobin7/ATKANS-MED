@@ -1,7 +1,7 @@
 const express = require('express');
-const { 
-    sendOtp, 
-    verifyOtp, 
+const {
+    sendOtp,
+    verifyOtp,
     getMe,
     requestLoginOTP,
     verifyLoginOTP,
@@ -11,6 +11,9 @@ const {
 const { protect } = require('../middleware/auth');
 
 const r = express.Router();
+
+// Root route for API status
+r.get('/', (req, res) => res.json({ message: 'Auth module is active' }));
 
 /**
  * CUSTOM OTP (EMAIL/SMS)
