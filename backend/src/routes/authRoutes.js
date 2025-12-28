@@ -6,7 +6,8 @@ const {
     requestLoginOTP,
     verifyLoginOTP,
     firebasePhoneLogin,
-    googleLogin
+    googleLogin,
+    ping
 } = require('../controllers/authController');
 const { protect } = require('../middleware/auth');
 
@@ -14,6 +15,9 @@ const r = express.Router();
 
 // Root route for API status
 r.get('/', (req, res) => res.json({ message: 'Auth module is active' }));
+
+// Connectivity check
+r.post('/ping', ping);
 
 /**
  * CUSTOM OTP (EMAIL/SMS)

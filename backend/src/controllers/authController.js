@@ -29,6 +29,13 @@ const verifyHashedOTP = async (otp, hashedOTP) => {
     return await bcryptjs.compare(otp, hashedOTP);
 };
 
+// @desc    Ping for health check
+// @route   POST /api/auth/ping
+// @access  Public
+exports.ping = async (req, res) => {
+    res.status(200).json({ success: true, message: 'Pong! Backend is reachable.' });
+};
+
 // @desc    Send OTP for registration or login
 // @route   POST /api/auth/send-otp
 // @access  Public

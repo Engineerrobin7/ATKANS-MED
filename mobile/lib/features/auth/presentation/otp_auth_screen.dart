@@ -18,15 +18,23 @@ class OTPService {
     required String role,
   }) async {
     try {
+      final url = Uri.parse('$baseUrl/send-otp');
+      print('🚀 Sending OTP (Email) to: $url');
+      
       final response = await http.post(
-        Uri.parse('$baseUrl/send-otp'),
-        headers: {'Content-Type': 'application/json'},
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
         body: jsonEncode({
           'email': email,
           'role': role,
           'method': 'email',
         }),
-      );
+      ).timeout(const Duration(seconds: 30));
+
+      print('📥 Response Status: ${response.statusCode}');
 
       if (response.statusCode == 200) {
         return {
@@ -42,6 +50,7 @@ class OTPService {
         };
       }
     } catch (e) {
+      print('❌ Send OTP Email Error: $e');
       return {
         'success': false,
         'message': 'Network error: $e',
@@ -55,7 +64,6 @@ class OTPService {
     required String role,
   }) async {
     try {
-      // Validate phone format (E.164)
       if (!phone.startsWith('+')) {
         return {
           'success': false,
@@ -63,15 +71,23 @@ class OTPService {
         };
       }
 
+      final url = Uri.parse('$baseUrl/send-otp');
+      print('🚀 Sending OTP (Phone) to: $url');
+      
       final response = await http.post(
-        Uri.parse('$baseUrl/send-otp'),
-        headers: {'Content-Type': 'application/json'},
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
         body: jsonEncode({
           'phone': phone,
           'role': role,
           'method': 'sms',
         }),
-      );
+      ).timeout(const Duration(seconds: 30));
+
+      print('📥 Response Status: ${response.statusCode}');
 
       if (response.statusCode == 200) {
         return {
@@ -87,6 +103,7 @@ class OTPService {
         };
       }
     } catch (e) {
+      print('❌ Send OTP Phone Error: $e');
       return {
         'success': false,
         'message': 'Network error: $e',
@@ -102,20 +119,27 @@ class OTPService {
     required String name,
   }) async {
     try {
+      final url = Uri.parse('$baseUrl/verify-otp');
+      print('🚀 Verifying OTP at: $url');
+      
       final response = await http.post(
-        Uri.parse('$baseUrl/verify-otp'),
-        headers: {'Content-Type': 'application/json'},
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
         body: jsonEncode({
           'email': email,
           'phone': phone,
           'otp': otp,
           'name': name,
         }),
-      );
+      ).timeout(const Duration(seconds: 30));
+
+      print('📥 Response Status: ${response.statusCode}');
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        // Save token locally
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('auth_token', data['token']);
         if (data['user']['email'] != null) await prefs.setString('user_email', data['user']['email']);
@@ -141,6 +165,7 @@ class OTPService {
         };
       }
     } catch (e) {
+      print('❌ Verify OTP Error: $e');
       return {
         'success': false,
         'message': 'Network error: $e',
@@ -149,7 +174,6 @@ class OTPService {
   }
 }
 
-// OTP Screen
 class OTPAuthScreen extends ConsumerStatefulWidget {
   const OTPAuthScreen({super.key});
 
@@ -158,18 +182,15 @@ class OTPAuthScreen extends ConsumerStatefulWidget {
 }
 
 class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
-  String _selectedMethod = 'email'; // 'email' or 'phone'
-  String _selectedRole = 'patient'; // 'patient' or 'doctor'
+  String _selectedMethod = 'email';
+  String _selectedRole = 'patient';
   
-  // Step 1: Get email/phone
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
-  
-  // Step 2: Verify OTP
   final _otpController = TextEditingController();
   final _nameController = TextEditingController();
   
-  int _currentStep = 1; // 1: email/phone input, 2: OTP verification
+  int _currentStep = 1;
   String? _errorMessage;
   bool _isLoading = false;
   String? _successMessage;
@@ -190,26 +211,33 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
       _successMessage = null;
     });
 
-    final otpService = ref.read(otpServiceProvider);
-    final result = _selectedMethod == 'email'
-        ? await otpService.sendOTPEmail(
-            email: _emailController.text.trim(),
-            role: _selectedRole,
-          )
-        : await otpService.sendOTPPhone(
-            phone: _phoneController.text.trim(),
-            role: _selectedRole,
-          );
+    try {
+      final otpService = ref.read(otpServiceProvider);
+      final result = _selectedMethod == 'email'
+          ? await otpService.sendOTPEmail(
+              email: _emailController.text.trim(),
+              role: _selectedRole,
+            )
+          : await otpService.sendOTPPhone(
+              phone: _phoneController.text.trim(),
+              role: _selectedRole,
+            );
 
-    setState(() {
-      _isLoading = false;
-      if (result['success']) {
-        _successMessage = result['message'];
-        _currentStep = 2; // Move to OTP verification
-      } else {
-        _errorMessage = result['message'];
-      }
-    });
+      setState(() {
+        _isLoading = false;
+        if (result['success']) {
+          _successMessage = result['message'];
+          _currentStep = 2;
+        } else {
+          _errorMessage = result['message'];
+        }
+      });
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+        _errorMessage = 'An unexpected error occurred: $e';
+      });
+    }
   }
 
   Future<void> _verifyOTP() async {
@@ -227,35 +255,41 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
       return;
     }
 
-    final otpService = ref.read(otpServiceProvider);
-    final result = await otpService.verifyOTP(
-      email: _selectedMethod == 'email' ? _emailController.text.trim() : null,
-      phone: _selectedMethod == 'phone' ? _phoneController.text.trim() : null,
-      otp: _otpController.text.trim(),
-      name: _nameController.text.trim(),
-    );
+    try {
+      final otpService = ref.read(otpServiceProvider);
+      final result = await otpService.verifyOTP(
+        email: _selectedMethod == 'email' ? _emailController.text.trim() : null,
+        phone: _selectedMethod == 'phone' ? _phoneController.text.trim() : null,
+        otp: _otpController.text.trim(),
+        name: _nameController.text.trim(),
+      );
 
-    setState(() {
-      _isLoading = false;
-      if (result['success']) {
-        _successMessage = 'Successfully logged in!';
-        final user = result['user'];
-        final role = user['role'] ?? 'patient';
-        
-        // Navigate to home screen based on role
-        Future.delayed(const Duration(seconds: 1), () {
-          if (mounted) {
-            if (role == 'doctor') {
-              context.go('/doctor-home');
-            } else {
-              context.go('/patient-home');
+      setState(() {
+        _isLoading = false;
+        if (result['success']) {
+          _successMessage = 'Successfully logged in!';
+          final user = result['user'];
+          final role = user['role'] ?? 'patient';
+          
+          Future.delayed(const Duration(seconds: 1), () {
+            if (mounted) {
+              if (role == 'doctor') {
+                context.go('/doctor-home');
+              } else {
+                context.go('/patient-home');
+              }
             }
-          }
-        });
-      } else {
-        _errorMessage = result['message'];
-      }
-    });
+          });
+        } else {
+          _errorMessage = result['message'];
+        }
+      });
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+        _errorMessage = 'Verification error: $e';
+      });
+    }
   }
 
   @override
@@ -271,7 +305,6 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Header
             Container(
               alignment: Alignment.center,
               margin: const EdgeInsets.only(bottom: 30),
@@ -300,7 +333,6 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
               ),
             ),
 
-            // Error Message
             if (_errorMessage != null)
               Container(
                 padding: const EdgeInsets.all(12),
@@ -316,7 +348,6 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
                 ),
               ),
 
-            // Success Message
             if (_successMessage != null)
               Container(
                 padding: const EdgeInsets.all(12),
@@ -332,9 +363,7 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
                 ),
               ),
 
-            // Step 1: Email/Phone Selection
             if (_currentStep == 1) ...[
-              // Role Selection
               Container(
                 margin: const EdgeInsets.only(bottom: 20),
                 child: Column(
@@ -378,7 +407,6 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
                 ),
               ),
 
-              // Method Selection
               Container(
                 margin: const EdgeInsets.only(bottom: 20),
                 child: Column(
@@ -421,7 +449,7 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
                                     'Faster',
                                     style: TextStyle(
                                       fontSize: 12,
-                                      color: Colors.grey.withOpacity(0.7),
+                                      color: Colors.grey.withValues(alpha: 0.7),
                                     ),
                                   ),
                                 ],
@@ -471,7 +499,6 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
                 ),
               ),
 
-              // Email Input
               if (_selectedMethod == 'email')
                 TextField(
                   controller: _emailController,
@@ -485,10 +512,8 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
                     ),
                     enabled: !_isLoading,
                   ),
-                  enabled: !_isLoading,
                 ),
 
-              // Phone Input
               if (_selectedMethod == 'phone')
                 TextField(
                   controller: _phoneController,
@@ -503,12 +528,10 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
                     ),
                     enabled: !_isLoading,
                   ),
-                  enabled: !_isLoading,
                 ),
 
               const SizedBox(height: 20),
 
-              // Send OTP Button
               SizedBox(
                 width: double.infinity,
                 height: 50,
@@ -543,9 +566,7 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
               ),
             ],
 
-            // Step 2: OTP Verification
             if (_currentStep == 2) ...[
-              // OTP Input
               TextField(
                 controller: _otpController,
                 keyboardType: TextInputType.number,
@@ -559,13 +580,11 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
                   ),
                   enabled: !_isLoading,
                 ),
-                enabled: !_isLoading,
                 style: const TextStyle(fontSize: 24, letterSpacing: 8),
               ),
 
               const SizedBox(height: 20),
 
-              // Name Input
               TextField(
                 controller: _nameController,
                 decoration: InputDecoration(
@@ -577,12 +596,10 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
                   ),
                   enabled: !_isLoading,
                 ),
-                enabled: !_isLoading,
               ),
 
               const SizedBox(height: 20),
 
-              // Verify Button
               SizedBox(
                 width: double.infinity,
                 height: 50,
@@ -618,7 +635,6 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
 
               const SizedBox(height: 15),
 
-              // Back Button
               TextButton(
                 onPressed: () {
                   setState(() {
@@ -632,7 +648,6 @@ class _OTPAuthScreenState extends ConsumerState<OTPAuthScreen> {
 
               const SizedBox(height: 15),
 
-              // Resend OTP
               Center(
                 child: GestureDetector(
                   onTap: _isLoading ? null : _sendOTP,
