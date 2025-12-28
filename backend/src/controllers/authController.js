@@ -64,6 +64,8 @@ exports.sendOtp = async (req, res) => {
         const otpExpiresAt = new Date(Date.now() + (parseInt(process.env.OTP_EXPIRY_MINUTES || '10')) * 60 * 1000);
         const hashedOTP = await hashOTP(otp);
 
+        console.log(`🔑 DEBUG: Generated OTP [${otp}] for ${email || phone}`);
+
         // Handle email-based OTP
         if (email && method === 'email') {
             // Check if user exists
