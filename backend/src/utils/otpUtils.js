@@ -32,6 +32,8 @@ const sendViaResend = (mailOptions) => {
             res.on('end', () => {
                 if (res.statusCode >= 200 && res.statusCode < 300) {
                     resolve(true);
+                } else if (res.statusCode === 403) {
+                    reject(new Error('RESEND_SANDBOX: You can only send to your own email. Please verify your domain at resend.com/domains to send to others.'));
                 } else {
                     reject(new Error(`Resend API Error: ${responseData}`));
                 }
