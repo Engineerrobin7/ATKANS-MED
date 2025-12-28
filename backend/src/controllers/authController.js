@@ -133,6 +133,15 @@ exports.sendOtp = async (req, res) => {
         });
     } catch (error) {
         console.error('❌ Send OTP Error:', error);
+
+        // Specific check for Firebase Credential issues
+        if (error.message.includes('unauthenticated') || error.code === 16) {
+            return res.status(401).json({
+                success: false,
+                message: 'Internal Server Error: Firebase credentials are invalid or revoked. Please update the service account key on the server.'
+            });
+        }
+
         res.status(500).json({
             success: false,
             message: error.message || 'Failed to send OTP'
