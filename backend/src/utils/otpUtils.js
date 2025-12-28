@@ -2,23 +2,23 @@ const nodemailer = require('nodemailer');
 const otpGenerator = require('otp-generator');
 
 // Configure Nodemailer transporter for email
-// Using 'service: gmail' is more reliable on cloud platforms like Render
+// Using Port 587 with STARTTLS is often more reliable on cloud platforms like Render
 const emailTransporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, // true for 465, false for other ports
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
     },
-});
-
-// Verify email transporter connection
-emailTransporter.verify((error, success) => {
-    if (error) {
-        console.error('Email transporter error:', error.message);
-    } else if (success) {
-        console.log('Email transporter is ready');
+    tls: {
+        // Do not fail on invalid certificates (helps on some cloud networks)
+        rejectUnauthorized: false
     }
 });
+
+// We removed the verify call as it can cause hangs on startup in some environments
+
 
 /**
  * Generates a numeric OTP
